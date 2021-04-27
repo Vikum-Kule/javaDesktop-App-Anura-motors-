@@ -5,30 +5,36 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #141d26;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anuramotors.HomeController">
-   <children>
-      <VBox alignment="TOP_CENTER" prefHeight="850.0" prefWidth="220.0" style="-fx-background-color: #243447;">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #141d26;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anuramotors.HomeController">
+   <top>
+      <Pane prefHeight="53.0" prefWidth="1080.0" style="-fx-background-color: #243447;" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <Pane prefHeight="667.0" prefWidth="221.0" style="-fx-background-color: #243447;" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Label alignment="CENTER" layoutX="4.0" layoutY="125.0" prefHeight="20.0" prefWidth="187.0" text="User" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="63.0" fitWidth="73.0" layoutX="66.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/userProfile.png" />
-                     </image>
-                  </ImageView>
-               </children>
+            <VBox alignment="TOP_CENTER" prefHeight="668.0" prefWidth="220.0" style="-fx-background-color: #243447;">
+         <children>
+            <Pane prefHeight="192.0" prefWidth="220.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="72.0" layoutX="75.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/userProfile.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="106.0" prefHeight="29.0" prefWidth="221.0" text="Username" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
             </Pane>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btn" stylesheets="@../style/styleLogin.css" text="Home" textFill="WHITE">
+            <Button fx:id="btnHome" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#homepage" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btn" stylesheets="@../style/styleLogin.css" text="Home" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -40,7 +46,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Orders" textFill="WHITE">
+            <Button fx:id="btnOrder" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#orders" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Orders" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -51,7 +57,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="332.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Stock" textFill="WHITE">
+            <Button fx:id="btnStock" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="332.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Stock" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -63,7 +69,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="52.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Notifications" textFill="WHITE">
+            <Button fx:id="btnNotification" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="52.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Notifications" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -74,7 +80,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="353.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Customers" textFill="WHITE">
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="353.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Customers" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -86,7 +92,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="311.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Analysis" textFill="WHITE">
+            <Button fx:id="btnAnalysis" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="311.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Analysis" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -98,7 +104,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="374.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Settings" textFill="WHITE">
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="374.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Settings" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -112,6 +118,14 @@
             </Button>
          </children>
       </VBox>
-      <StackPane fx:id="contentArea" layoutX="220.0" prefHeight="786.0" prefWidth="1024.0" />
-   </children>
-</AnchorPane>
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="540.0" prefWidth="880.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane fx:id="contentArea" layoutX="7.0" prefHeight="668.0" prefWidth="866.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
