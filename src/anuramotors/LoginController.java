@@ -84,9 +84,11 @@ public class LoginController implements Initializable {
                     System.out.println("Login Sucessful..");
                     Stage stage1 = (Stage) btnSignin.getScene().getWindow();
                     stage1.close(); 
-                    Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+                    FXMLLoader fxml = new FXMLLoader();
+                    Parent root = fxml.load(getClass().getResource("Home.fxml"));
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
+                    stage.setFullScreen(true);
                     stage.setScene(scene); 
                     stage.initStyle(StageStyle.UNDECORATED);
                     stage.show();
@@ -104,8 +106,8 @@ public class LoginController implements Initializable {
         }
     }
     
-    private void loadWindow(){
-       
+    public void refreshWarning(){
+        warning.setText("");
     }
     
 }

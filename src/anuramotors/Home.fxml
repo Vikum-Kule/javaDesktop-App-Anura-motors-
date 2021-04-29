@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #141d26;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anuramotors.HomeController">
-   <top>
-      <Pane prefHeight="53.0" prefWidth="1080.0" style="-fx-background-color: #243447;" BorderPane.alignment="CENTER" />
-   </top>
    <left>
       <Pane prefHeight="667.0" prefWidth="221.0" style="-fx-background-color: #243447;" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="668.0" prefWidth="220.0" style="-fx-background-color: #243447;">
          <children>
-            <Pane prefHeight="192.0" prefWidth="220.0">
+            <Pane prefHeight="246.0" prefWidth="220.0">
                      <children>
                         <ImageView fitHeight="70.0" fitWidth="72.0" layoutX="75.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -32,6 +31,15 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
+                        <Button fx:id="btnMakeOrder" layoutX="80.0" layoutY="156.0" mnemonicParsing="false" onAction="#makeOrder" prefHeight="57.0" prefWidth="47.0" style="-fx-background-radius: 25px; -fx-border-radius: 25px;" styleClass="btnMakeOrder" stylesheets="@../style/styleLogin.css">
+                           <graphic>
+                              <ImageView fx:id="btn" fitHeight="61.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/add-button.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
             </Pane>
             <Button fx:id="btnHome" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#homepage" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btn" stylesheets="@../style/styleLogin.css" text="Home" textFill="WHITE">
@@ -128,4 +136,37 @@
          </children>
       </AnchorPane>
    </center>
+   <top>
+      <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="27.0" spacing="10.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="27.0" prefWidth="998.0">
+               <children>
+                  <Label layoutX="11.0" layoutY="5.0" text="Anura Motors">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ImageView fx:id="minimize" fitHeight="15.0" fitWidth="68.0" onMouseClicked="#min" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/minus-symbol.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="maximize" fitHeight="15.0" fitWidth="111.0" onMouseClicked="#max" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/maximize.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="cancel" fitHeight="14.0" fitWidth="14.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/cancel.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

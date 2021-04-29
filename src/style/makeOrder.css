@@ -1,0 +1,50 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 28, 2021, 4:26:36 AM
+    Author     : Vikum
+*/
+
+.cBox_nic{
+    
+    -fx-border-color:white;
+    -fx-border-width: 1px 0px 1px 0px;
+    -fx-background-color:  transparent; 
+}
+.combo-box .cell{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+.combo-box .list-view .list-cell{
+    -fx-text-fill: black;
+}
+
+.cBox{
+   -fx-text-fill:white;
+    -fx-border-color:white;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-background-color:  transparent; 
+}
+
+.txtFeild{
+    -fx-text-fill:white;
+    -fx-border-color:white;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-background-color:  transparent; 
+}
+.cBox_Vno{
+    -fx-text-fill:white;
+    -fx-border-color:white;
+    -fx-border-width: 1px 0px 1px 0px;
+    -fx-background-color:  transparent;
+}
+.btnNew{
+    -fx-text-fill:white;
+   -fx-background-color:   #243447; 
+}
+.label{
+    -fx-text-fill:white;
+}
