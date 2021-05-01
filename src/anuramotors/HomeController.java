@@ -101,6 +101,7 @@ public class HomeController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("order.fxml"));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(root);
+        
     }
     
     //minimz window

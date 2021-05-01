@@ -20,7 +20,7 @@ public class AnuraMotors extends Application {
     double x,y;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
         
         Scene scene = new Scene(root);
         stage.setScene(scene);
