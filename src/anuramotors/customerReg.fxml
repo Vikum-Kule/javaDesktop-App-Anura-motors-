@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="372.0" prefWidth="556.0" style="-fx-background-color: #141d26; -fx-border-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anuramotors.CustomerRegController">
+   <children>
+      <ImageView fitHeight="372.0" fitWidth="556.0" layoutY="-2.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="86.0" fitWidth="88.0" layoutX="235.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/userProfile.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="14.0" layoutY="131.0" prefHeight="159.0" prefWidth="181.0">
+         <children>
+            <Label prefHeight="43.0" prefWidth="186.0" text="Customer Name" textFill="#fcfafa">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="186.0" text="Phone" textFill="#fcfafa">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="10.0" layoutY="53.0" prefHeight="43.0" prefWidth="186.0" text="Vehicle No (Optional)" textFill="#fcfafa">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <Button fx:id="btnAdd" layoutX="183.0" layoutY="311.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #141d26; -fx-border-color: white;" text="Add" textFill="#fffefe">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCancel" layoutX="292.0" layoutY="311.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #141d26; -fx-border-color: white;" text="Cancel" textFill="#fffefe">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtCustomerName" layoutX="195.0" layoutY="125.0" prefHeight="25.0" prefWidth="342.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtPhone" layoutX="195.0" layoutY="168.0" prefHeight="25.0" prefWidth="342.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtVehicle" layoutX="195.0" layoutY="211.0" prefHeight="25.0" prefWidth="342.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fx:id="warningText" fill="#f50000" layoutX="195.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="314.13671875">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

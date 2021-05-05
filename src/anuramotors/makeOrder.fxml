@@ -19,7 +19,7 @@
    <children>
       <BorderPane prefHeight="720.0" prefWidth="1100.0">
          <top>
-            <Pane BorderPane.alignment="CENTER">
+            <Pane prefHeight="47.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
                <children>
                   <Label layoutX="48.0" layoutY="10.0" text="Customer: " textFill="WHITE">
                      <font>
@@ -31,16 +31,16 @@
                         <Image url="@../img/customer.png" />
                      </image>
                   </ImageView>
-                  <ComboBox fx:id="cBoxPhone" layoutX="397.0" layoutY="7.0" prefHeight="25.0" prefWidth="210.0" promptText="Phone" styleClass="cBox_nic" stylesheets="@../style/makeOrder.css" />
-                  <ComboBox fx:id="cBoxVehicle" layoutX="646.0" layoutY="6.0" prefHeight="25.0" prefWidth="210.0" promptText="Vehicle No" styleClass="cBox_Vno" stylesheets="@../style/makeOrder.css" />
-                  <Button layoutX="960.0" layoutY="8.0" mnemonicParsing="false" styleClass="btnNew" stylesheets="@../style/makeOrder.css" text="New">
+                  <ComboBox fx:id="cBoxPhone" layoutX="397.0" layoutY="7.0" onAction="#phoneSelect" prefHeight="25.0" prefWidth="210.0" promptText="Phone" styleClass="cBox_nic" stylesheets="@../style/makeOrder.css" />
+                  <ComboBox fx:id="cBoxVehicle" layoutX="646.0" layoutY="6.0" onAction="#vehicleSelect" prefHeight="25.0" prefWidth="210.0" promptText="Vehicle No" styleClass="cBox_Vno" stylesheets="@../style/makeOrder.css" />
+                  <Button fx:id="btnNewCustomer" layoutX="960.0" layoutY="8.0" mnemonicParsing="false" onAction="#newCustomer" styleClass="btnNew" stylesheets="@../style/makeOrder.css" text="New">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
                   <Text fx:id="customerName" fill="#7a79e1" layoutX="132.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="197.13671875">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="16.0" />
                      </font>
                   </Text>
                </children>
@@ -63,10 +63,10 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox layoutX="146.0" layoutY="40.0" prefHeight="86.0" prefWidth="263.0" spacing="25.0">
+                  <VBox layoutX="146.0" layoutY="18.0" prefHeight="86.0" prefWidth="263.0" spacing="20.0">
                      <children>
-                        <ComboBox prefHeight="25.0" prefWidth="265.0" style="-fx-background-color: transparent;" styleClass="cBox" stylesheets="@../style/makeOrder.css" />
-                        <ComboBox layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="265.0" style="-fx-background-color: transparent;" styleClass="cBox" stylesheets="@../style/makeOrder.css" />
+                        <ComboBox fx:id="cBoxName" onAction="#onclickName" prefHeight="25.0" prefWidth="265.0" style="-fx-background-color: transparent;" styleClass="cBox" stylesheets="@../style/makeOrder.css" />
+                        <ComboBox fx:id="cBoxBrand" layoutX="10.0" layoutY="10.0" onAction="#onclickBrand" prefHeight="25.0" prefWidth="265.0" style="-fx-background-color: transparent;" styleClass="cBox" stylesheets="@../style/makeOrder.css" />
                      </children>
                   </VBox>
                   <VBox layoutX="439.0" layoutY="24.0" prefHeight="106.0" prefWidth="162.0">
@@ -83,9 +83,30 @@
                         </Label>
                      </children>
                   </VBox>
-                  <TextField layoutX="669.0" layoutY="40.0" styleClass="txtFeild" stylesheets="@../style/makeOrder.css" />
-                  <TextField layoutX="669.0" layoutY="91.0" styleClass="txtFeild" stylesheets="@../style/makeOrder.css" />
-                  <Button layoutX="908.0" layoutY="64.0" mnemonicParsing="false" text="ADD" />
+                  <TextField fx:id="intputQty" layoutX="669.0" layoutY="32.0" onMouseClicked="#onclickQty" styleClass="txtFeild" stylesheets="@../style/makeOrder.css">
+                     <font>
+                        <Font size="15.0" />
+                     </font></TextField>
+                  <TextField fx:id="inputDiscount" layoutX="669.0" layoutY="77.0" styleClass="txtFeild" stylesheets="@../style/makeOrder.css">
+                     <font>
+                        <Font size="15.0" />
+                     </font></TextField>
+                  <Button fx:id="btnAdd" layoutX="908.0" layoutY="64.0" mnemonicParsing="false" onAction="#onclickAdd" text="ADD" />
+                  <Text fx:id="txtCustomerSelectionWarning" fill="RED" layoutX="387.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="326.13671875">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Label layoutX="439.0" layoutY="130.0" prefHeight="33.0" prefWidth="94.0" stylesheets="@../style/makeOrder.css" text="Unit Price:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="txtUnitPrice" fill="WHITE" layoutX="550.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="156.13671875">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
          </center>
@@ -106,6 +127,16 @@
                         </TableView>
                      </content>
                   </ScrollPane>
+                  <Button fx:id="btnDone" layoutX="785.0" layoutY="459.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="109.0" text="Done">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnOrderCancel" layoutX="924.0" layoutY="459.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="109.0" text="Cancel">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
                </children></Pane>
          </bottom>
       </BorderPane>
