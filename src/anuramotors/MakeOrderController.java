@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
@@ -205,6 +206,7 @@ public class MakeOrderController implements Initializable {
                     Scene scene = new Scene(root);
                     stage.setScene(scene); 
                     stage.initStyle(StageStyle.UNDECORATED);
+                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.show();
     }
 
@@ -275,15 +277,25 @@ public class MakeOrderController implements Initializable {
         }
     }
 
-    private void onclickQty(ActionEvent event) {
-
-    }
+    
 
     @FXML
     private void onclickQty(MouseEvent event) {
         if(!"Please select a customer".equals(txtCustomerSelectionWarning.getText())){
            txtCustomerSelectionWarning.setText(""); 
         }
+    }
+
+    @FXML
+    private void openConfirm(ActionEvent event) throws IOException {
+        FXMLLoader fxml = new FXMLLoader();
+                    Parent root = fxml.load(getClass().getResource("ConfirmOrder.fxml"));
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene); 
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.show();
     }
     
    

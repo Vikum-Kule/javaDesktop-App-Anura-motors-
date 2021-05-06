@@ -127,7 +127,7 @@
                         </TableView>
                      </content>
                   </ScrollPane>
-                  <Button fx:id="btnDone" layoutX="785.0" layoutY="459.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="109.0" text="Done">
+                  <Button fx:id="btnDone" layoutX="785.0" layoutY="459.0" mnemonicParsing="false" onAction="#openConfirm" prefHeight="30.0" prefWidth="109.0" text="Done">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
