@@ -107,6 +107,131 @@ public class HomeModel {
         }
    }
    
+   public boolean checkCategory(String itemName){
+       
+       String Category="";
+       try {
+            String query = "SELECT Category FROM item WHERE name = ?";
+            PreparedStatement statement = conection.prepareStatement(query);
+            statement.setString(1, itemName);
+            ResultSet set = statement.executeQuery();
+
+            while (set.next()) {
+               Category = set.getString("Category");
+            }
+
+            statement.close();
+            set.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+         
+            if("yes".equals(Category)){
+                return true;
+            }
+            else{
+                return false;
+            }
+           
+   }
+   
+   //check sub categories....
+   public boolean checkSubCategory(String category){
+       
+       String Category="";
+       try {
+            String query = "SELECT SubCategory FROM MainCategory WHERE Category = ?";
+            PreparedStatement statement = conection.prepareStatement(query);
+            statement.setString(1, category);
+            ResultSet set = statement.executeQuery();
+
+            while (set.next()) {
+               Category = set.getString("SubCategory");
+                
+            }
+
+            statement.close();
+            set.close();
+            
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+       
+            if("yes".equals(Category)){
+                return true;
+            }
+            else{
+                return false;
+            }
+   }
+   
+   //List loder for Category..
+List<String> getItemCategory(String itemName) {
+        
+        // Define the data you will be returning, in this case, a List of Strings for the ComboBox
+        List<String> options = new ArrayList<>();
+
+        try {
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Connection con = DriverManager.getConnection(connectionUrl);
+            String query = "SELECT MainCategory.Category FROM MainCategory "
+                    + "INNER JOIN item ON item.itemId = MainCategory.itemId "
+                    + "WHERE item.name = ?";
+            PreparedStatement statement = conection.prepareStatement(query);
+            statement.setString(1, itemName);
+            ResultSet set = statement.executeQuery();
+
+            while (set.next()) {
+                System.out.println(set.getString("Category"));
+                options.add(set.getString("Category"));
+            }
+
+            statement.close();
+            set.close();
+            // Return the List
+            return options;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+   }
+   
+    //load sub categories...
+    List<String> getItemSubCategory(String Category) {
+        
+        // Define the data you will be returning, in this case, a List of Strings for the ComboBox
+        List<String> options = new ArrayList<>();
+
+        try {
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Connection con = DriverManager.getConnection(connectionUrl);
+            String query = "SELECT SubCategory.SubCategory FROM SubCategory "
+                    + "INNER JOIN MainCategory ON MainCategory.categoryNo = SubCategory.MainCategoryId "
+                    + "WHERE MainCategory.Category = ?";
+            PreparedStatement statement = conection.prepareStatement(query);
+            statement.setString(1, Category);
+            ResultSet set = statement.executeQuery();
+
+            while (set.next()) {
+                System.out.println(set.getString("SubCategory"));
+                options.add(set.getString("SubCategory"));
+            }
+
+            statement.close();
+            set.close();
+            // Return the List
+            return options;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+   }
+
+
    //list loder for vehicle numbers...
    List<String> getDataVehicle() {
 
@@ -190,6 +315,7 @@ List<String> getItemBrand() {
             return null;
         }
    }
+
 
 // return customer name and vehicle number number by taking phone number..
 

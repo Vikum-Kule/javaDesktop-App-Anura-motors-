@@ -84,6 +84,12 @@ public class MakeOrderController implements Initializable {
     private Button btnDone;
     @FXML
     private Button btnOrderCancel;
+    @FXML
+    private Text txtTotal;
+    @FXML
+    private ComboBox<String> cBoxMCategory;
+    @FXML
+    private ComboBox<String> cBoxSCategory;
     
     public MakeOrderController() {
         this.HomeModel = new HomeModel();
@@ -107,7 +113,7 @@ public class MakeOrderController implements Initializable {
 
     } 
     
-    
+    public double total=0.0;
     public void fillcBox(){
         //set the list of numbers to combo box.
         cBoxPhone.setItems(FXCollections.observableArrayList(HomeModel.getDataphone()));
@@ -135,10 +141,12 @@ public class MakeOrderController implements Initializable {
 "inner join item on tempOrder.itemId = item.itemId";
             PreparedStatement statement = conection.prepareStatement(query);
             ResultSet set = statement.executeQuery();
-                           
+            DecimalFormat df = new DecimalFormat("#.00");              
             while (set.next()) {
-                 System.out.println(set.getDouble("price"));
-                 DecimalFormat df = new DecimalFormat("#.00");
+                 
+                 total = total+set.getDouble("price");
+                 System.out.println(total);
+                 
                  String Price = String.valueOf(df.format(set.getDouble("price")));
                 options.add(new HomeModel(index,set.getString("name"),set.getString("brand"),
                         set.getInt("qty"),Price));
@@ -151,7 +159,9 @@ public class MakeOrderController implements Initializable {
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         table.setItems(options);
-
+        String Total = String.valueOf(df.format(total));
+        txtTotal.setText(Total);
+        
             statement.close();
             set.close();
             System.out.println(options);
@@ -211,7 +221,7 @@ public class MakeOrderController implements Initializable {
     }
 
     @FXML
-    private void onclickName(ActionEvent event) {
+    private void onclickName(ActionEvent event){
         txtCustomerSelectionWarning.setText("");
         //check wether customer select or not.. 
         if(customerName.getText()==""){
@@ -220,8 +230,17 @@ public class MakeOrderController implements Initializable {
         }
         else{
             String itemName = cBoxName.getSelectionModel().getSelectedItem();
+            cBoxBrand.setItems(FXCollections.observableArrayList(HomeModel.setItemBrand(itemName)));
+
+            //check whether item exist or not...
+            if(HomeModel.checkCategory(itemName)){
+                //System.out.println(HomeModel.getItemCategory(itemName));
+                cBoxMCategory.setItems(FXCollections.observableArrayList(HomeModel.getItemCategory(itemName)));
+            }
+            else{
              //set list of brand names to the combo box.
-             cBoxBrand.setItems(FXCollections.observableArrayList(HomeModel.setItemBrand(itemName)));
+             
+            }
         }
     }
 
@@ -256,7 +275,6 @@ public class MakeOrderController implements Initializable {
         else{
             
             //initialization... 
-            System.out.println("item ");
             String itemName = cBoxName.getSelectionModel().getSelectedItem();
             String itemBrand = cBoxBrand.getSelectionModel().getSelectedItem();
             String qty = intputQty.getText();
@@ -296,6 +314,23 @@ public class MakeOrderController implements Initializable {
                     stage.initStyle(StageStyle.UNDECORATED);
                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.show();
+    }
+
+    @FXML
+    private void onclickMCategory(ActionEvent event) {
+        String mainCategory = cBoxMCategory.getSelectionModel().getSelectedItem();
+        if(HomeModel.checkSubCategory(mainCategory)){
+            //set sub categories according to main category..
+            cBoxSCategory.setItems(FXCollections.observableArrayList(HomeModel.getItemSubCategory(mainCategory)));
+        }
+        else{
+            //
+        }
+    }
+
+    @FXML
+    private void onclickSCategory(ActionEvent event) {
+        
     }
     
    

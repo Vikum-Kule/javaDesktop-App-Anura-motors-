@@ -47,26 +47,38 @@
             </Pane>
          </top>
          <center>
-            <Pane prefHeight="271.0" prefWidth="1037.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="239.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="14.0" layoutY="24.0" prefHeight="106.0" prefWidth="122.0">
+                  <VBox layoutX="14.0" layoutY="24.0" prefHeight="106.0" prefWidth="122.0" spacing="20.0">
                      <children>
                         <Label prefHeight="53.0" prefWidth="122.0" stylesheets="@../style/makeOrder.css" text="Item Name">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="10.0" prefHeight="53.0" prefWidth="122.0" stylesheets="@../style/makeOrder.css" text="Item Brand">
+                        <Label layoutX="10.0" layoutY="10.0" prefHeight="53.0" prefWidth="122.0" stylesheets="@../style/makeOrder.css" text="Main Category">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" prefHeight="53.0" prefWidth="122.0" stylesheets="@../style/makeOrder.css" text="Sub Category">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="104.0" prefHeight="53.0" prefWidth="122.0" stylesheets="@../style/makeOrder.css" text="Brand">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                      </children>
                   </VBox>
-                  <VBox layoutX="146.0" layoutY="18.0" prefHeight="86.0" prefWidth="263.0" spacing="20.0">
+                  <VBox layoutX="136.0" layoutY="8.0" prefHeight="86.0" prefWidth="263.0" spacing="10.0">
                      <children>
-                        <ComboBox fx:id="cBoxName" onAction="#onclickName" prefHeight="25.0" prefWidth="265.0" style="-fx-background-color: transparent;" styleClass="cBox" stylesheets="@../style/makeOrder.css" />
-                        <ComboBox fx:id="cBoxBrand" layoutX="10.0" layoutY="10.0" onAction="#onclickBrand" prefHeight="25.0" prefWidth="265.0" style="-fx-background-color: transparent;" styleClass="cBox" stylesheets="@../style/makeOrder.css" />
+                        <ComboBox fx:id="cBoxName" onAction="#onclickName" prefHeight="19.0" prefWidth="265.0" style="-fx-background-color: transparent;" styleClass="cBox" stylesheets="@../style/makeOrder.css" />
+                        <ComboBox fx:id="cBoxMCategory" layoutX="10.0" layoutY="10.0" onAction="#onclickMCategory" prefHeight="19.0" prefWidth="263.0" style="-fx-background-color: transparent;" styleClass="cBox" stylesheets="@../style/makeOrder.css" />
+                        <ComboBox fx:id="cBoxSCategory" layoutX="10.0" layoutY="10.0" onAction="#onclickSCategory" prefHeight="25.0" prefWidth="265.0" style="-fx-background-color: transparent;" styleClass="cBox" stylesheets="@../style/makeOrder.css" />
+                        <ComboBox fx:id="cBoxBrand" layoutX="10.0" layoutY="106.0" onAction="#onclickBrand" prefHeight="25.0" prefWidth="265.0" style="-fx-background-color: transparent;" styleClass="cBox" stylesheets="@../style/makeOrder.css" />
                      </children>
                   </VBox>
                   <VBox layoutX="439.0" layoutY="24.0" prefHeight="106.0" prefWidth="162.0">
@@ -107,32 +119,42 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
+                  <Label layoutX="789.0" layoutY="128.0" prefHeight="33.0" prefWidth="59.0" stylesheets="@../style/makeOrder.css" text="Total :">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="txtTotal" fill="WHITE" layoutX="855.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="218.13671875">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
          </center>
          <bottom>
-            <Pane prefHeight="498.0" prefWidth="1069.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="410.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
                <children>
-                  <ScrollPane hbarPolicy="NEVER" prefHeight="442.0" prefWidth="1100.0">
+                  <ScrollPane hbarPolicy="NEVER" layoutY="-1.0" prefHeight="369.0" prefWidth="1100.0">
                      <content>
-                        <TableView fx:id="table" prefHeight="442.0" prefWidth="1082.0" stylesheets="@../style/makeOrder.css">
+                        <TableView fx:id="table" prefHeight="366.0" prefWidth="1090.0" stylesheets="@../style/makeOrder.css">
                           <columns>
                               <TableColumn fx:id="colNo" editable="false" prefWidth="61.0" text="NO" />
                             <TableColumn fx:id="colItemName" prefWidth="372.0" style="-fx-text-fill: black;" text="ITEM NAME" />
                             <TableColumn fx:id="colBrand" minWidth="0.0" prefWidth="316.0" text="BRAND" />
                               <TableColumn fx:id="colQty" prefWidth="119.0" text="QTY" />
                               <TableColumn fx:id="colPrice" prefWidth="132.0" text="PRICE" />
-                              <TableColumn fx:id="colDelete" prefWidth="81.0" text="DELETE" />
+                              <TableColumn fx:id="colDelete" prefWidth="88.0" text="DELETE" />
                           </columns>
                         </TableView>
                      </content>
                   </ScrollPane>
-                  <Button fx:id="btnDone" layoutX="785.0" layoutY="459.0" mnemonicParsing="false" onAction="#openConfirm" prefHeight="30.0" prefWidth="109.0" text="Done">
+                  <Button fx:id="btnDone" layoutX="708.0" layoutY="395.0" mnemonicParsing="false" onAction="#openConfirm" prefHeight="30.0" prefWidth="109.0" text="Done">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnOrderCancel" layoutX="924.0" layoutY="459.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="109.0" text="Cancel">
+                  <Button fx:id="btnOrderCancel" layoutX="913.0" layoutY="393.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="109.0" text="Cancel">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

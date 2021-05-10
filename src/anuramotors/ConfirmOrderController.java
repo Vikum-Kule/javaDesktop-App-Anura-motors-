@@ -31,6 +31,7 @@ import javafx.stage.Stage;
  */
 public class ConfirmOrderController implements Initializable {
     public HomeModel HomeModel = new HomeModel();
+    public MakeOrderController MakeOrderController = new MakeOrderController();
     
     @FXML
     private Button btnConfirm;
@@ -108,12 +109,59 @@ public class ConfirmOrderController implements Initializable {
     }
     @FXML
     private void confirmRecheck(ActionEvent event) {
+        printVal();
+        
     }
 
     @FXML
     private void closeRecheck(ActionEvent event) {
         Stage stage1 = (Stage) btnCancel.getScene().getWindow();
         stage1.close();
+    }
+    
+    public void printVal(){
+        Connection conection =HomeModel.conection;
+        
+        //initialize table row indexes
+        
+        try {
+            String query = "select item.itemId, tempOrder.customerId, tempOrder.qty, tempOrder.price " +
+                            " from tempOrder " +
+                            "inner join item on tempOrder.itemId = item.itemId";
+            PreparedStatement statement = conection.prepareStatement(query);
+            ResultSet set = statement.executeQuery();
+                           
+            while (set.next()) {
+                
+               int itemId = set.getInt("itemId");
+               String customerId = set.getString("customerId");
+               int Qty = set.getInt("qty");
+               Double price = set.getDouble("price");
+              //  String total = 
+//                 System.out.println(set.getDouble("price"));
+//                 DecimalFormat df = new DecimalFormat("#.00");
+//                 String Price = String.valueOf(df.format(set.getDouble("price")));
+//                options.add(new HomeModel(index,set.getString("name"),set.getString("brand"),
+//                        set.getInt("qty"),Price));
+//                index++;
+                
+            }
+//        colNo.setCellValueFactory(new PropertyValueFactory<>("no"));
+//        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+//        colBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
+//        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+//        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+//        table.setItems(options);
+
+            statement.close();
+            set.close();
+            System.out.println(new PropertyValueFactory<>("name"));
+            // Return the List
+           // return options;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
     
 }
