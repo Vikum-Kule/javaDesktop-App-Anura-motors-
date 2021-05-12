@@ -250,16 +250,57 @@ public class MakeOrderController implements Initializable {
            txtCustomerSelectionWarning.setText(""); 
         }
         
-        String itemName = cBoxName.getSelectionModel().getSelectedItem();
-        String itemBrand = cBoxBrand.getSelectionModel().getSelectedItem();
-        Pair<Integer, Double> p = HomeModel.itemData(itemName, itemBrand);
-        int qty = p.getKey();
-        Double unitPrice = p.getValue();
-        DecimalFormat df = new DecimalFormat("#.00");
-        String uPrice = String.valueOf(df.format(unitPrice));
+        //*************check whether item has Categories..***********
         
-        intputQty.setPromptText("Available : "+qty);
-        txtUnitPrice.setText(uPrice);
+        //if item has not a category..
+        if(cBoxMCategory.getSelectionModel().isEmpty() && cBoxSCategory.getSelectionModel().isEmpty()){
+            System.out.println("no category");
+            String itemName = cBoxName.getSelectionModel().getSelectedItem();
+            String itemBrand = cBoxBrand.getSelectionModel().getSelectedItem();
+            Pair<Integer, Double> p = HomeModel.itemData(itemName, itemBrand);
+            int qty = p.getKey();
+            Double unitPrice = p.getValue();
+            DecimalFormat df = new DecimalFormat("#.00");
+            String uPrice = String.valueOf(df.format(unitPrice));
+
+            intputQty.setPromptText("Available : "+qty);
+            txtUnitPrice.setText(uPrice);
+        }
+        //if item has Main category without subcategories..
+        else if(!cBoxMCategory.getSelectionModel().isEmpty() && cBoxSCategory.getSelectionModel().isEmpty()){
+            System.out.println("only main category");
+            String itemName = cBoxName.getSelectionModel().getSelectedItem();
+            String itemBrand = cBoxBrand.getSelectionModel().getSelectedItem();
+            String category = cBoxMCategory.getSelectionModel().getSelectedItem();
+            Pair<Integer, Double> p = HomeModel.itemDataforMCategory(itemName, itemBrand, category);
+            int qty = p.getKey();
+            Double unitPrice = p.getValue();
+            
+            DecimalFormat df = new DecimalFormat("#.00");
+            String uPrice = String.valueOf(df.format(unitPrice));
+
+            intputQty.setPromptText("Available : "+qty);
+            txtUnitPrice.setText(uPrice);
+        }
+        //if item has both categories...
+        else{
+            System.out.println("category exist");
+            System.out.println("only main category");
+            String itemName = cBoxName.getSelectionModel().getSelectedItem();
+            String itemBrand = cBoxBrand.getSelectionModel().getSelectedItem();
+            String Mcategory = cBoxMCategory.getSelectionModel().getSelectedItem();
+            String Scategory = cBoxSCategory.getSelectionModel().getSelectedItem();
+            Pair<Integer, Double> p = HomeModel.itemDataforSCategory(itemName, itemBrand, Mcategory, Scategory);
+            int qty = p.getKey();
+            Double unitPrice = p.getValue();
+            
+            DecimalFormat df = new DecimalFormat("#.00");
+            String uPrice = String.valueOf(df.format(unitPrice));
+
+            intputQty.setPromptText("Available : "+qty);
+            txtUnitPrice.setText(uPrice);
+        }
+        
         
         
     }

@@ -8,29 +8,30 @@
 
 <Pane id="AnchorPane" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #141d26;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anuramotors.OrderController">
    <children>
-      <BorderPane prefHeight="750.0" prefWidth="1100.0">
+      <BorderPane layoutX="25.0" prefHeight="750.0" prefWidth="1100.0">
          <top>
             <Pane prefHeight="79.0" prefWidth="1100.0" BorderPane.alignment="CENTER" />
          </top>
-         <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <left>
+            <Pane prefHeight="671.0" prefWidth="1055.0" BorderPane.alignment="CENTER">
                <children>
-                  <ScrollPane layoutX="16.0" layoutY="15.0" prefHeight="643.0" prefWidth="1083.0">
+                  <ScrollPane layoutX="16.0" layoutY="15.0" prefHeight="643.0" prefWidth="1054.0">
                      <content>
-                        <TableView fx:id="Table" prefHeight="643.0" prefWidth="1069.0">
+                        <TableView fx:id="Table" prefHeight="643.0" prefWidth="1153.0">
                           <columns>
-                            <TableColumn fx:id="colNo" prefWidth="101.99996948242188" text="NO" />
-                            <TableColumn fx:id="colCustomer" prefWidth="516.0000152587891" text="CUSTOMER" />
-                              <TableColumn fx:id="colDate" prefWidth="216.0" text="DATE TIME" />
-                              <TableColumn fx:id="colOrderNo" prefWidth="108.0" text="ORDER NO" />
-                              <TableColumn fx:id="colTotal" prefWidth="125.0" text="TOTAL" />
+                            <TableColumn fx:id="colNo" prefWidth="63.99993896484375" text="NO" />
+                            <TableColumn fx:id="colCustomer" prefWidth="432.0" text="CUSTOMER" />
+                              <TableColumn fx:id="colPhone" prefWidth="155.0" text="PHONE" />
+                              <TableColumn fx:id="colDate" prefWidth="158.0" text="DATE TIME" />
+                              <TableColumn fx:id="colOrderNo" prefWidth="88.0" text="ORDER NO" />
+                              <TableColumn fx:id="colTotal" minWidth="0.0" prefWidth="147.0" text="TOTAL" />
                           </columns>
                         </TableView>
                      </content>
                   </ScrollPane>
                </children>
             </Pane>
-         </center>
+         </left>
       </BorderPane>
    </children>
 </Pane>

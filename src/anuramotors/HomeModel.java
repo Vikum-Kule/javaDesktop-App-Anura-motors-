@@ -208,7 +208,7 @@ List<String> getItemCategory(String itemName) {
         try {
            // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //Connection con = DriverManager.getConnection(connectionUrl);
-            String query = "SELECT SubCategory.SubCategory FROM SubCategory "
+            String query = "SELECT SubCategory.Scategory FROM SubCategory "
                     + "INNER JOIN MainCategory ON MainCategory.categoryNo = SubCategory.MainCategoryId "
                     + "WHERE MainCategory.Category = ?";
             PreparedStatement statement = conection.prepareStatement(query);
@@ -216,8 +216,8 @@ List<String> getItemCategory(String itemName) {
             ResultSet set = statement.executeQuery();
 
             while (set.next()) {
-                System.out.println(set.getString("SubCategory"));
-                options.add(set.getString("SubCategory"));
+                System.out.println(set.getString("Scategory"));
+                options.add(set.getString("Scategory"));
             }
 
             statement.close();
@@ -433,6 +433,7 @@ public Pair<String, String> customerNameFromVehicle(String vehicle){
         }
    }
   
+  //return available qty and unit price for without category items..
   public Pair<Integer, Double> itemData(String itemName, String itemBrand){
       int avlQty =0;
       Double unitPrice= 0.0;
@@ -462,6 +463,78 @@ public Pair<String, String> customerNameFromVehicle(String vehicle){
             return null;
         }
    }
+  
+  //return available qty and unit price for only main category items..
+  public Pair<Integer, Double> itemDataforMCategory(String itemName, String itemBrand, String category){
+      int avlQty =0;
+      Double unitPrice= 0.0;
+      try {
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Connection con = DriverManager.getConnection(connectionUrl);
+            String query = "select MainCategory.qty,MainCategory.price from MainCategory "
+                    + "inner join item on item.itemId = MainCategory.itemId"
+                    + " where item.name = ? and item.brand =? and MainCategory.Category=?";
+            PreparedStatement statement = conection.prepareStatement(query);
+            statement.setString(1,itemName );
+            statement.setString(2,itemBrand );
+            statement.setString(3,category);
+            ResultSet set = statement.executeQuery();
+            
+            while (set.next()) {
+               avlQty = set.getInt("qty");
+               unitPrice = set.getDouble("price");
+               
+               
+            }
+            statement.close();
+            set.close();
+
+            // Return the List
+            return new Pair<>(avlQty, unitPrice);
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+   }
+  
+ 
+   //return available qty and unit price for wiht main category and sub category items..
+  public Pair<Integer, Double> itemDataforSCategory(String itemName, String itemBrand, String Mcategory, String Scategory){
+      int avlQty =0;
+      Double unitPrice= 0.0;
+      try {
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Connection con = DriverManager.getConnection(connectionUrl);
+            String query = "select SubCategory.qty, SubCategory.price from SubCategory "
+                    + "inner join item on item.itemId = MainCategory.itemId"
+                    + " inner join MainCategory on MainCategory.categoryNo = SubCategory.MainCategoryId"
+                    + " where item.name = ? and item.brand =? and MainCategory.Category=? and SubCategory.Scategory=?";
+            PreparedStatement statement = conection.prepareStatement(query);
+            statement.setString(1,itemName );
+            statement.setString(2,itemBrand );
+            statement.setString(3,Mcategory);
+            statement.setString(4,Scategory);
+            ResultSet set = statement.executeQuery();
+            
+            while (set.next()) {
+               avlQty = set.getInt("qty");
+               unitPrice = set.getDouble("price");
+               
+               
+            }
+            statement.close();
+            set.close();
+
+            // Return the List
+            return new Pair<>(avlQty, unitPrice);
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+   }
+ 
   
   //return itemId..
   public int findItemId (String itemName, String itemBrand){
