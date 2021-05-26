@@ -1,0 +1,13 @@
+
+
+.tab{
+    -fx-border-width: 0px 1px 0px 1px;
+    -fx-border-color: white;
+    -fx-background-color:  #2e4358;
+    -fx-pref-tile-height: 60;
+    -fx-pref-tile-width: 200;
+}
+.jfx-tab-pane .tab-header-background
+{
+  -fx-background-color: #2e4358;
+}

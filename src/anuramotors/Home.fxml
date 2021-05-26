@@ -65,7 +65,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="btnStock" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="332.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Stock" textFill="WHITE">
+            <Button fx:id="btnStock" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="332.0" mnemonicParsing="false" onAction="#onclickStock" prefHeight="42.0" prefWidth="194.0" style="-fx-border-color: #141d26;" styleClass="btnMid" stylesheets="@../style/styleLogin.css" text="Stock" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

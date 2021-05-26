@@ -103,6 +103,14 @@ public class HomeController implements Initializable {
         contentArea.getChildren().setAll(root);
         
     }
+    //load stock page.
+    @FXML
+    private void onclickStock(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("stock.fxml"));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(root);
+    }
+ 
     
     //minimz window
     @FXML
@@ -127,6 +135,10 @@ public class HomeController implements Initializable {
         Stage s = (Stage)((Node)event.getSource()).getScene().getWindow();
         s.close();
     }
+
+    
+
+    
 
     
     
