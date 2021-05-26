@@ -136,19 +136,28 @@ public class MakeOrderController implements Initializable {
         //initialize table row indexes
         int index = 1;
         try {
-            String query = "select item.name, item.brand, tempOrder.customerId, tempOrder.qty, tempOrder.price " +
+            String query = "select item.name, item.brand, tempOrder.customerId, tempOrder.MCategory, tempOrder.SCategory, tempOrder.qty, tempOrder.price " +
 " from tempOrder " +
 "inner join item on tempOrder.itemId = item.itemId";
             PreparedStatement statement = conection.prepareStatement(query);
             ResultSet set = statement.executeQuery();
             DecimalFormat df = new DecimalFormat("#.00");              
             while (set.next()) {
-                 
+                    String name;
+                if(set.getString("MCategory")== null && set.getString("SCategory")== null){
+                    name =set.getString("name");
+                }
+                else if(set.getString("MCategory")!= null && set.getString("SCategory")== null){
+                    name =set.getString("name")+ " ( "+set.getString("MCategory")+" )";
+                }
+                else{
+                    name =set.getString("name")+ " ( "+set.getString("MCategory")+" / "+set.getString("SCategory")+" ) ";
+                }
                  total = total+set.getDouble("price");
                  System.out.println(total);
                  
                  String Price = String.valueOf(df.format(set.getDouble("price")));
-                options.add(new HomeModel(index,set.getString("name"),set.getString("brand"),
+                options.add(new HomeModel(index,name,set.getString("brand"),
                         set.getInt("qty"),Price));
                 index++;
                 
@@ -326,13 +335,50 @@ public class MakeOrderController implements Initializable {
             int itemId = HomeModel.findItemId(itemName, itemBrand);
             String customerId = cBoxPhone.getSelectionModel().getSelectedItem();
             Double price = uPrice*Qty;
-            if(HomeModel.checkDuplicateItem(itemId)){
-                txtCustomerSelectionWarning.setText("Duplicate input...");
+            
+            //item has not a categories...
+            if(cBoxMCategory.getSelectionModel().isEmpty() && cBoxSCategory.getSelectionModel().isEmpty()){
+                 if(HomeModel.checkDuplicateItem(itemId)){
+                    txtCustomerSelectionWarning.setText("Duplicate input...");
+                }
+                else{
+                    HomeModel.addItemtoOrder(customerId, itemId, Qty, price);
+                    
+                    //clear selected sections....
+                    cBoxName.getSelectionModel().clearSelection();
+                    cBoxBrand.getSelectionModel().clearSelection();
+                    filltable();
+                } 
+            }
+            //item has Main category..
+            else if(!cBoxMCategory.getSelectionModel().isEmpty() && cBoxSCategory.getSelectionModel().isEmpty()){
+                String Mcategory = cBoxMCategory.getSelectionModel().getSelectedItem();
+                int MCategoryId = HomeModel.findMCategoryId(itemId, Mcategory);
+                if(HomeModel.checkDuplicateItemwithMainCategory(itemId, MCategoryId)){
+                    txtCustomerSelectionWarning.setText("Duplicate input...");
+                }
+                else{
+                    HomeModel.addItemtoOrderwithMCategory(customerId, itemId, Qty, price, MCategoryId);
+                    filltable();
+                }
             }
             else{
-                HomeModel.addItemtoOrder(customerId, itemId, Qty, price);
-                filltable();
+                String Mcategory = cBoxMCategory.getSelectionModel().getSelectedItem();
+                String Scategory = cBoxSCategory.getSelectionModel().getSelectedItem();
+                //category id
+                int MCategoryId = HomeModel.findMCategoryId(itemId, Mcategory);
+                if(HomeModel.checkDuplicateItemwithCategory(itemId, MCategoryId, Scategory)){
+                    txtCustomerSelectionWarning.setText("Duplicate input...");
+                }
+                else{
+                    
+                    //System.out.println("main category "+MCategoryId);
+                    HomeModel.addItemtoOrderwithCategory(customerId, itemId, Qty, price, MCategoryId, Scategory);
+                    filltable(); 
+                }
             }
+            
+            
         }
     }
 

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.util.Pair;
@@ -585,7 +586,84 @@ public Pair<String, String> customerNameFromVehicle(String vehicle){
         }
   }
   
-  //check wether adding item is duplicate or not... 
+  //find Main Category id..
+  public int findMCategoryId(int itemId, String Category){
+      int MCategoryId =0;
+      try {
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Connection con = DriverManager.getConnection(connectionUrl);
+            String query = "select categoryNo from MainCategory where itemId =? and Category =?";
+            PreparedStatement statement = conection.prepareStatement(query);
+            statement.setInt(1,itemId );
+            statement.setString(2,Category );
+            ResultSet set = statement.executeQuery();
+            
+            while (set.next()) {
+               MCategoryId = set.getInt("categoryNo");
+               
+            }
+            statement.close();
+            set.close();
+
+            // Return the itemId
+            return MCategoryId;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return 0;
+        }
+      
+  }
+  
+  //add items to tempOrder table with MCategory...
+  public void addItemtoOrderwithMCategory(String customerId, int itemId, int qty, Double price, int MCategory){
+      try {
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Connection con = DriverManager.getConnection(connectionUrl);
+            String query = "INSERT INTO tempOrder(tempId,customerId,itemId,qty,price,MCategory) VALUES(null,?,?,?,?,?)";
+            PreparedStatement statement = conection.prepareStatement(query);
+            statement.setString(1, customerId);
+            statement.setInt(2, itemId);
+            statement.setInt(3, qty);
+            statement.setDouble(4, price);
+            statement.setInt(5, MCategory);
+            //statement.setString(5,datetime('now'));
+            statement.executeUpdate();     
+            statement.close();
+           // return true;
+
+        } catch (SQLException ex) {
+           System.out.println(ex);
+          // return false;
+        }
+  }
+  
+  //add items to tempOrder table with MCategory and SCategory...
+  public void addItemtoOrderwithCategory(String customerId, int itemId, int qty, Double price, int MCategory, String SCategory){
+      try {
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Connection con = DriverManager.getConnection(connectionUrl);
+            String query = "INSERT INTO tempOrder(tempId,customerId,itemId,qty,price,MCategory,SCategory) VALUES(null,?,?,?,?,?,?)";
+            PreparedStatement statement = conection.prepareStatement(query);
+            statement.setString(1, customerId);
+            statement.setInt(2, itemId);
+            statement.setInt(3, qty);
+            statement.setDouble(4, price);
+            statement.setInt(5, MCategory);
+            statement.setString(6, SCategory);
+            //statement.setString(5,datetime('now'));
+            statement.executeUpdate();     
+            statement.close();
+           // return true;
+
+        } catch (SQLException ex) {
+           System.out.println(ex);
+          // return false;
+        }
+  }
+  
+  
+  //check wether adding item(Non category) is duplicate or not... 
   public boolean checkDuplicateItem(int itemId) throws SQLException{
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
@@ -611,5 +689,146 @@ public Pair<String, String> customerNameFromVehicle(String vehicle){
             
          }
   }
-    
+  
+    //insert data to order table..
+  public int addOrderTable(String customerId, Double total, String payment){
+      //System.out.println("customerId "+ customerId +"total "+total);
+      int Id= 0;
+       try {
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Connection con = DriverManager.getConnection(connectionUrl);
+            String query = "INSERT INTO 'order'(customerId,dateTime,total,payment) VALUES(?,datetime('now'),?,?)";
+            PreparedStatement statement = conection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, customerId);
+            statement.setDouble(2, total);
+            statement.setString(3, payment);
+            //statement.setString(5,datetime('now'));
+            statement.executeUpdate();  
+            ResultSet rs = statement.getGeneratedKeys();
+            int generatedKey = 0;
+            if (rs.next()) {
+                generatedKey = rs.getInt(1);
+            }
+            //take last enterd row id....
+            System.out.println("generatedKey "+ generatedKey);
+            Id = generatedKey;
+            statement.close();
+            return Id;
+
+        } catch (SQLException ex) {
+           System.out.println(ex);
+           return Id;
+        }
+  }
+   
+  
+  //check wether adding item(only main category) is duplicate or not... 
+  public boolean checkDuplicateItemwithMainCategory(int itemId,int MCategory) throws SQLException{
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
+            
+            String quary = "select * from tempOrder where itemId = ? and MCategory =?";
+        try {    
+            preparedStatement = conection.prepareStatement(quary);
+            preparedStatement.setInt(1, itemId);
+            preparedStatement.setInt(2, MCategory);
+            
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return true;
+            }
+            else{    
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println( e );
+            return false;
+        } finally{
+            preparedStatement.close();
+            resultSet.close();
+            
+         }
+  }
+  
+  //check wether adding item(with both category) is duplicate or not... 
+  public boolean checkDuplicateItemwithCategory(int itemId,int MCategory, String SCategory) throws SQLException{
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
+            
+            String quary = "select * from tempOrder where itemId = ? and MCategory =? and SCategory=?";
+        try {    
+            preparedStatement = conection.prepareStatement(quary);
+            preparedStatement.setInt(1, itemId);
+            preparedStatement.setInt(2, MCategory);
+            preparedStatement.setString(3, SCategory);
+            
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return true;
+            }
+            else{    
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println( e );
+            return false;
+        } finally{
+            preparedStatement.close();
+            resultSet.close();
+            
+         }
+  }
+  
+  public String findCustomerId (){
+      String customerId = "";
+      try {
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Connection con = DriverManager.getConnection(connectionUrl);
+            String query = "select customerId from tempOrder Limit 1";
+            PreparedStatement statement = conection.prepareStatement(query);
+            ResultSet set = statement.executeQuery();
+            
+            while (set.next()) {
+               customerId = set.getString("customerId");
+               
+            }
+            statement.close();
+            set.close();
+
+            // Return the itemId
+            return customerId;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+      
+  }
+  
+  public void addItem_ItemOrder(int OrderId, int ItemId, int Qty, Double price, int discount, int MCategory, int SCategory){
+      try {
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Connection con = DriverManager.getConnection(connectionUrl);
+            String query = "INSERT INTO OrderItem(OrderId, ItemId, Qty, price, discount, MCategory, SCategory) "
+                    + "VALUES(?,?,?,?,?,?,?)";
+            PreparedStatement statement = conection.prepareStatement(query);
+            statement.setInt(1, OrderId);
+            statement.setInt(2, ItemId);
+            statement.setInt(3, Qty);
+            statement.setDouble(4, price);
+            statement.setInt(5, discount);
+            statement.setInt(6, MCategory);
+            statement.setInt(7, SCategory);
+            //statement.setString(5,datetime('now'));
+            statement.executeUpdate();     
+            statement.close();
+           // return true;
+
+        } catch (SQLException ex) {
+           System.out.println(ex);
+          // return false;
+        }
+  }
+  
+
 }

@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -39,7 +41,16 @@ public class OrderController implements Initializable {
     private TableView<OrderModel> Table;
     @FXML
     private TableColumn<OrderModel, String> colPhone;
+   
+    private final OrderModel OrderModel;
+    @FXML
+    private TableColumn<OrderModel, String> colPayment;
+    public OrderController() {
+        this.OrderModel = new OrderModel();
+        
+    }
 
+    ObservableList<OrderModel> options = FXCollections.observableArrayList();
     /**
      * Initializes the controller class.
      * @param url
@@ -47,50 +58,50 @@ public class OrderController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        fillTable();
         // TODO
     }    
     
     public void fillTable(){
-//            Table.getItems().clear();
-//        //database connection
-//        Connection conection =OrderModel.conection;
-//        
-//        //initialize table row indexes
-//        int index = 1;
-//        try {
-//            String query = "";
-//            PreparedStatement statement = conection.prepareStatement(query);
-//            ResultSet set = statement.executeQuery();
-//            DecimalFormat df = new DecimalFormat("#.00");              
-//            while (set.next()) {
-//                 
-//                 total = total+set.getDouble("price");
-//                 System.out.println(total);
-//                 
-//                 String Price = String.valueOf(df.format(set.getDouble("price")));
-//                options.add(new HomeModel(index,set.getString("name"),set.getString("brand"),
-//                        set.getInt("qty"),Price));
-//                index++;
-//                
-//            }
-//        colNo.setCellValueFactory(new PropertyValueFactory<>("no"));
-//        colItemName.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        colBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
-//        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
-//        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-//        table.setItems(options);
-//        String Total = String.valueOf(df.format(total));
-//        txtTotal.setText(Total);
-//        
-//            statement.close();
-//            set.close();
-//            System.out.println(options);
-//            // Return the List
-//           // return options;
-//
-//        } catch (SQLException ex) {
-//            System.out.println(ex);
-//        }
+            Table.getItems().clear();
+        //database connection
+        Connection conection =OrderModel.conection;
+        
+        //initialize table row indexes
+        int index = 1;
+        try {
+            String query = "select orderId,customer.customerName,customer.phone,dateTime,total,payment "
+                    + "from 'order' "
+                    + "inner join customer on customerId = customer.phone";
+            PreparedStatement statement = conection.prepareStatement(query);
+            ResultSet set = statement.executeQuery();
+            DecimalFormat df = new DecimalFormat("#.00");              
+            while (set.next()) {
+                 
+                String Price = String.valueOf(df.format(set.getDouble("total")));
+            options.add(new OrderModel(index,set.getInt("orderId"), set.getString("customerName"), set.getString("phone"), Price,
+                    set.getString("dateTime"), set.getString("payment")));
+                index++;
+                
+            }
+        colNo.setCellValueFactory(new PropertyValueFactory<>("no"));
+        colCustomer.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        colPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colPayment.setCellValueFactory(new PropertyValueFactory<>("payment"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+        colOrderNo.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        Table.setItems(options);
+        
+            statement.close();
+            set.close();
+            System.out.println(options);
+            // Return the List
+           // return options;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     
     }
     

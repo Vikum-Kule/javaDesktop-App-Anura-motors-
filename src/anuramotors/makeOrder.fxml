@@ -145,6 +145,7 @@
                               <TableColumn fx:id="colQty" prefWidth="119.0" text="QTY" />
                               <TableColumn fx:id="colPrice" prefWidth="132.0" text="PRICE" />
                               <TableColumn fx:id="colDelete" prefWidth="88.0" text="DELETE" />
+                              <TableColumn fx:id="colMCategory" prefWidth="372.0" style="-fx-text-fill: black;" text="M CATEGORY" visible="false" />
                           </columns>
                         </TableView>
                      </content>

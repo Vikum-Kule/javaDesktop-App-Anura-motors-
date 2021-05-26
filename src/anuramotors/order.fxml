@@ -23,8 +23,9 @@
                             <TableColumn fx:id="colCustomer" prefWidth="432.0" text="CUSTOMER" />
                               <TableColumn fx:id="colPhone" prefWidth="155.0" text="PHONE" />
                               <TableColumn fx:id="colDate" prefWidth="158.0" text="DATE TIME" />
-                              <TableColumn fx:id="colOrderNo" prefWidth="88.0" text="ORDER NO" />
+                              <TableColumn fx:id="colPayment" prefWidth="88.0" text="PAYMENT" />
                               <TableColumn fx:id="colTotal" minWidth="0.0" prefWidth="147.0" text="TOTAL" />
+                              <TableColumn fx:id="colOrderNo" prefWidth="63.99993896484375" text="ORDER NO" visible="false" />
                           </columns>
                         </TableView>
                      </content>
