@@ -830,5 +830,17 @@ public Pair<String, String> customerNameFromVehicle(String vehicle){
         }
   }
   
+  //deleting all data in tempOrder table..
+  public void deleteDataFromTempOrder(){
+       String quary = "delete from tempOrder";
+        try {    
+            PreparedStatement statement = conection.prepareStatement(quary);
+            statement.executeUpdate();     
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println( e );
+        } 
+  }
+  
 
 }

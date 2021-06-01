@@ -90,6 +90,8 @@ public class MakeOrderController implements Initializable {
     private ComboBox<String> cBoxMCategory;
     @FXML
     private ComboBox<String> cBoxSCategory;
+    @FXML
+    private TableColumn<?, ?> colMCategory;
     
     public MakeOrderController() {
         this.HomeModel = new HomeModel();
@@ -106,12 +108,32 @@ public class MakeOrderController implements Initializable {
         //calling to fill combo Boxes..
         fillcBox();
         
+        //find previous user...
+        previousCustomer();
+        
         //calling to fill table...with order items
         filltable();
         
         
 
     } 
+    
+    public void previousCustomer(){
+        String customerId = HomeModel.findCustomerId();
+        if(customerId != ""){
+            Pair<String, String> p = HomeModel.customerName(customerId);
+            String customName = p.getKey();
+            String vehicle = p.getValue();
+            customerName.setText(customName);
+            cBoxVehicle.getSelectionModel().select(vehicle);
+            cBoxPhone.getSelectionModel().select(customerId);
+            cBoxVehicle.setDisable(true);
+            cBoxPhone.setDisable(true);
+            
+        }
+    }
+    
+    
     
     public double total=0.0;
     public void fillcBox(){
@@ -378,7 +400,8 @@ public class MakeOrderController implements Initializable {
                 }
             }
             
-            
+            cBoxVehicle.setDisable(true);
+            cBoxPhone.setDisable(true);
         }
     }
 
@@ -418,6 +441,21 @@ public class MakeOrderController implements Initializable {
     @FXML
     private void onclickSCategory(ActionEvent event) {
         
+    }
+    
+    public String note = "Are you sure to delete order data?..";
+    
+    @FXML
+    private void onclickCancel(ActionEvent event) throws IOException {
+        FXMLLoader fxml = new FXMLLoader();
+                    Parent root = fxml.load(getClass().getResource("notificationWindow.fxml"));
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene); 
+                    stage.initStyle(StageStyle.UNDECORATED);
+                     stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.show();
+                    filltable();
     }
     
    

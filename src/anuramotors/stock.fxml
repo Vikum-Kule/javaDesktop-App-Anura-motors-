@@ -1,37 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane id="AnchorPane" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #141d26;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anuramotors.StockController">
+<Pane id="AnchorPane" prefHeight="750.0" prefWidth="1111.0" style="-fx-background-color: #141d26;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anuramotors.StockController">
    <children>
-      <JFXTabPane layoutX="50.0" layoutY="25.0" prefHeight="700.0" prefWidth="1000.0" rotateGraphic="true" style="-fx-background-color: #2b333b;" stylesheets="@../style/orderPage.css">
+      <JFXTabPane layoutX="20.0" layoutY="25.0" prefHeight="700.0" prefWidth="1086.0" rotateGraphic="true" style="-fx-background-color: #2b333b;" stylesheets="@../style/orderPage.css">
          <tabs>
             <Tab text="STOCK">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1079.0">
                      <children>
-                        <BorderPane prefHeight="664.0" prefWidth="1000.0">
+                        <BorderPane prefHeight="664.0" prefWidth="1082.0">
                            <top>
-                              <Pane prefHeight="61.0" prefWidth="1000.0" BorderPane.alignment="CENTER" />
+                              <Pane prefHeight="61.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <TextField layoutX="14.0" layoutY="14.0" prefHeight="28.0" prefWidth="257.0" promptText="search by item name" styleClass="txtFeild" stylesheets="@../style/makeOrder.css" />
+                                    <TextField layoutX="373.0" layoutY="14.0" prefHeight="28.0" prefWidth="257.0" promptText="search by brand" styleClass="txtFeild" stylesheets="@../style/makeOrder.css" />
+                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent;" />
+                                    <ImageView fitHeight="28.0" fitWidth="20.0" layoutX="284.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/magnifying-glass.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Button layoutX="649.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="28.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/magnifying-glass.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button layoutX="984.0" layoutY="16.0" mnemonicParsing="false" style="-fx-background-color: tranparent; -fx-border-color: white; -fx-border-radius: 10px;" styleClass="btn" stylesheets="@../style/makeOrder.css" text="NEW" textFill="#fcfcfc">
+                                       <graphic>
+                                          <ImageView fitHeight="18.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/add-button.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Button>
+                                 </children></Pane>
                            </top>
                            <center>
-                              <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+                              <ScrollPane prefHeight="603.0" prefWidth="1093.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                                  <content>
-                                    <TableView prefHeight="603.0" prefWidth="986.0">
+                                    <TableView fx:id="itemTable" prefHeight="603.0" prefWidth="1080.0">
                                       <columns>
-                                        <TableColumn fx:id="colItem" prefWidth="227.99996948242188" text="ITEM" />
+                                          <TableColumn fx:id="colNo" minWidth="0.0" prefWidth="44.999969482421875" text="#" />
+                                        <TableColumn fx:id="colItem" prefWidth="270.0" text="ITEM" />
                                         <TableColumn fx:id="colBrand" prefWidth="216.0" text="BRAND" />
                                           <TableColumn fx:id="colMCategory" prefWidth="174.0" text="MAIN CATEGORY" />
                                           <TableColumn fx:id="colSCategory" prefWidth="167.0" text="SUB CATEGORY" />
-                                          <TableColumn fx:id="colQty" minWidth="0.0" prefWidth="87.0" text="QTY" />
-                                          <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="110.0" text="CURRENT PRICE" />
+                                          <TableColumn fx:id="colQty" minWidth="0.0" prefWidth="72.0" text="QTY" />
+                                          <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="120.0" text="CURRENT PRICE" />
+                                          <TableColumn fx:id="colItemId" minWidth="0.0" prefWidth="72.0" text="Id" visible="false" />
+                                          <TableColumn fx:id="colMCategoryId" minWidth="0.0" prefWidth="72.0" text="McategoryId" visible="false" />
+                                          <TableColumn fx:id="colSCategoryId" minWidth="0.0" prefWidth="72.0" text="ScategoryId" visible="false" />
                                       </columns>
                                     </TableView>
                                  </content>
