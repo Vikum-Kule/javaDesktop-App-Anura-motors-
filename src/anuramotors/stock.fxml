@@ -43,7 +43,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button layoutX="984.0" layoutY="16.0" mnemonicParsing="false" style="-fx-background-color: tranparent; -fx-border-color: white; -fx-border-radius: 10px;" styleClass="btn" stylesheets="@../style/makeOrder.css" text="NEW" textFill="#fcfcfc">
+                                    <Button fx:id="btnAddItem" layoutX="984.0" layoutY="16.0" mnemonicParsing="false" onAction="#onclickAddItem" style="-fx-background-color: tranparent; -fx-border-color: white; -fx-border-radius: 10px;" styleClass="btn" stylesheets="@../style/makeOrder.css" text="NEW" textFill="#fcfcfc">
                                        <graphic>
                                           <ImageView fitHeight="18.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
