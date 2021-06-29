@@ -26,16 +26,7 @@
             </ImageView>
             <BorderPane prefHeight="609.0" prefWidth="475.0">
                <top>
-                  <Pane prefHeight="22.0" prefWidth="475.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Button fx:id="btnClose" layoutX="442.0" layoutY="3.0" mnemonicParsing="false" onAction="#onclickClose" prefHeight="25.0" prefWidth="27.0" style="-fx-background-color: transparent;" />
-                        <ImageView fitHeight="14.0" fitWidth="23.0" layoutX="449.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/close.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
+                  <Pane prefHeight="22.0" prefWidth="475.0" BorderPane.alignment="CENTER" />
                </top>
                <bottom>
                   <Pane prefHeight="52.0" prefWidth="475.0" BorderPane.alignment="CENTER" />

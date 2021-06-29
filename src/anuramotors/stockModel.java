@@ -6,6 +6,10 @@
 package anuramotors;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -124,6 +128,46 @@ public class stockModel {
        conection = sqliteConnection.ConnectDB();
         if(conection == null){
             System.exit(1);
+        }
+    }
+    
+    List<String> MainCategory(){
+       List<String> option = new ArrayList<>();
+       
+        try {
+            String quary = "Select Category from MainCategory";
+            PreparedStatement ps = conection.prepareStatement(quary) ;
+            ResultSet set =  ps.executeQuery();
+            
+            while(set.next()){
+                option.add(set.getString("Category"));
+            }
+             ps.close();
+             set.close();
+             return option;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    List<String> SubCategory(){
+       List<String> option = new ArrayList<>();
+       
+        try {
+            String quary = "Select Scategory from SubCategory";
+            PreparedStatement ps = conection.prepareStatement(quary) ;
+            ResultSet set =  ps.executeQuery();
+            
+            while(set.next()){
+                option.add(set.getString("Scategory"));
+            }
+             ps.close();
+             set.close();
+             return option;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
         }
     }
     

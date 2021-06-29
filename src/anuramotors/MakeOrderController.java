@@ -242,7 +242,7 @@ public class MakeOrderController implements Initializable {
     @FXML
     private void newCustomer(ActionEvent event) throws IOException {
         FXMLLoader fxml = new FXMLLoader();
-                    Parent root = fxml.load(getClass().getResource("customerReg.fxml"));
+                    Parent root = fxml.load(getClass().getResource("addToStock.fxml"));
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
                     stage.setScene(scene); 

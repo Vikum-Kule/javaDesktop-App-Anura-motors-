@@ -166,12 +166,12 @@ public class StockController implements Initializable {
     @FXML
     private void onclickAddItem(ActionEvent event) throws IOException {
         FXMLLoader fxml = new FXMLLoader();
-                    Parent root = fxml.load(getClass().getResource("addToStock.fxml"));
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene); 
-                    stage.initStyle(StageStyle.UNDECORATED);
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.show();
+        Parent root = fxml.load(getClass().getResource("test.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene); 
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 }
