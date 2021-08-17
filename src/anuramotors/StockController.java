@@ -79,6 +79,7 @@ public class StockController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         fillNoCatgory();
         fillMCatgory();
+        fillMain_Sub_Catgory();
         // TODO
     }
     
@@ -139,6 +140,50 @@ public class StockController implements Initializable {
                 String Price = String.valueOf(df.format(set.getDouble("price")));
                 options.add(new stockModel(index,set.getString("name"), set.getString("brand"),set.getString("Category"),"no", set.getInt("qty"), Price,
                     set.getInt("itemId"),set.getInt("categoryNo"),0));
+                index++;
+            }
+            colNo.setCellValueFactory(new PropertyValueFactory<>("no"));
+            colItem.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+            colBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
+            colMCategory.setCellValueFactory(new PropertyValueFactory<>("MCategory"));
+            colSCategory.setCellValueFactory(new PropertyValueFactory<>("SCategroy"));
+            colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+            colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+            colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+            colMCategoryId.setCellValueFactory(new PropertyValueFactory<>("MCategoryId"));
+            colSCategoryId.setCellValueFactory(new PropertyValueFactory<>("SCategoryId"));
+            itemTable.setItems(options);
+            
+            statement.close();
+            set.close();
+            System.out.println(options);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        
+    }
+    
+    //table fill with Main & Sub category items..
+    public void fillMain_Sub_Catgory(){
+        System.out.println("Main sub category....");
+        Connection conection = stockModel.conection;
+        
+        try {
+            String query = "select item.itemId,item.name,item.brand,SubCategory.qty, SubCategory.price, MainCategory.categoryNo, MainCategory.Category,"
+                    + " SubCategory.Scategory, SubCategory.SubCategoryId "
+                    + "from MainCategory "
+                    + "inner join item on MainCategory.itemId = item.itemId "
+                    + "inner join SubCategory on MainCategory.categoryNo = SubCategory.MainCategoryId "
+                    + "where item.Category = 'yes' and MainCategory.SubCategory = 'yes'";
+            PreparedStatement statement = conection.prepareStatement(query);
+            ResultSet set = statement.executeQuery();
+            DecimalFormat df = new DecimalFormat("#.00");
+            
+            while(set.next()){
+                String Price = String.valueOf(df.format(set.getDouble("price")));
+                options.add(new stockModel(index,set.getString("name"), set.getString("brand"),set.getString("Category"),set.getString("Scategory"), set.getInt("qty"), Price,
+                    set.getInt("itemId"),set.getInt("categoryNo"),set.getInt("SubCategoryId")));
                 index++;
             }
             colNo.setCellValueFactory(new PropertyValueFactory<>("no"));

@@ -17,27 +17,28 @@ import javafx.stage.StageStyle;
  * @author Vikum
  */
 public class AnuraMotors extends Application {
-    double x,y;
+
+    double x, y;
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-        
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
-        root.setOnMousePressed(event->{
-            x= event.getSceneX();
-            y= event.getSceneY();
+        root.setOnMousePressed(event -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
         }
-        
         );
-        
-        root.setOnMouseDragged(event->{
+
+        root.setOnMouseDragged(event -> {
             stage.setX(event.getScreenX() - x);
             stage.setY(event.getScreenY() - y);
         }
         );
-        
+
         stage.show();
     }
 
@@ -47,5 +48,5 @@ public class AnuraMotors extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
